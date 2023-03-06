@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a simple implementation of a Naive Bayes classifier to classify emails as spam or not spam. The dataset used contains 5,572 emails, 3,281 of which are spam and 2,291 of which are not spam. The dataset is split into a training set and a test set, with 3,000 emails in the training set and 2,572 emails in the test set. The training set is used to train the classifier, and the test set is used to evaluate the classifier.
+This project is a simple implementation of a Naive Bayes classifier to classify emails as spam or not spam. Making the data usable for the classifier required parsing each email for words, vectorizing these words into a feature vector, and then training the classifier on the feature vectors. The classifier was then tested using k-fold cross validation.
 
 ## Vectorizer Algorithms
 
