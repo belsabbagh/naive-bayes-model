@@ -6,8 +6,7 @@ K = 3000
 
 def tfidf(X, y):
     tfidf = TfidfVectorizer(analyzer='word')
-    res = tfidf.fit_transform(X).toarray()
-    return pd.DataFrame(res, columns=tfidf.get_feature_names_out())
+    return pd.DataFrame(tfidf.fit_transform(X).toarray(), columns=tfidf.get_feature_names_out())
 
 
 def chi2_select(X, y):
