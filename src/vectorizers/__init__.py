@@ -1,18 +1,21 @@
+import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import chi2
-
-def __vectorize(data, vectorizer):
-    return vectorizer.fit_transform(data)
+from sklearn.feature_selection import SelectKBest, chi2
 
 
 def tfidf(X, y):
     tfidf = TfidfVectorizer(analyzer='word')
-    return __vectorize(X, tfidf).toarray()
+    res = tfidf.fit_transform(X).toarray()
+    return pd.DataFrame(res, columns=tfidf.get_feature_names_out())
 
 
 def chi2_select(X, y):
-    return SelectKBest(chi2, k=64).fit_transform(
-        __vectorize(X, CountVectorizer(analyzer='word')).toarray(),
-        y
+    k = 100
+    count = CountVectorizer(analyzer='word')
+    return pd.DataFrame(
+        SelectKBest(chi2, k=k).fit_transform(
+            count.fit_transform(X).toarray(),
+            y
+        ),
+        columns=count.get_feature_names_out()[0:k]
     )
