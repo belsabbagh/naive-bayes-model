@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.feature_selection import SelectKBest, chi2
 
+K = 3000
 
 def tfidf(X, y):
     tfidf = TfidfVectorizer(analyzer='word')
@@ -10,12 +11,11 @@ def tfidf(X, y):
 
 
 def chi2_select(X, y):
-    k = 100
     count = CountVectorizer(analyzer='word')
     return pd.DataFrame(
-        SelectKBest(chi2, k=k).fit_transform(
+        SelectKBest(chi2, k=K).fit_transform(
             count.fit_transform(X).toarray(),
             y
         ),
-        columns=count.get_feature_names_out()[0:k]
+        columns=count.get_feature_names_out()[0:K]
     )
