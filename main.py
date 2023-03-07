@@ -5,7 +5,7 @@ from src.vectorizers import chi2_select, tfidf
 
 
 if __name__ == '__main__':
-    df = pd.read_csv('data/spam.csv')[['category', 'text']]
+    df = pd.read_csv('data/spam.csv', encoding='ISO 8859-15')[['category', 'text']]
     X, y = df['text'].values, df['category']
     print(f'TFIDF Accuracy: {round(base_test(tfidf(X, y), y), 5)}')
     print(f'Chi^2 Accuracy: {round(base_test(chi2_select(X, y), y), 5)}')
